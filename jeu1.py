@@ -16,24 +16,33 @@ def is_already_done_b(arr, x, y):
 
 def print_arr2D(arr):
     for line in arr:
-        print(*line)
+        for car in line:
+            if (car == 0):
+                print("\033[38;5;239m" + str(car) + "\033[0m", end=' ')
+            elif (car == 1 ):
+                print("\033[38;5;41m" + str(car) + "\033[0m", end=' ')
+            else:
+                print("\033[38;5;243m" + car + "\033[0m", end=' ')
+        print("\r")
+        #print(*line)
 
 
 def check_user_coord(arr_p, coord):
     if coord == "" or coord == " ":
         print("Vous n'avez rien rentrez. ")
         return 0
-    if len(coord) < 2 or len(coord) > 3:
+    if len(coord) <= 2 or len(coord) > 3:
         print("Ce n'est pas le bon format.\nRessayez avec ce format : 1;1.")
-        return 0
-    if int(coord[0]) < 1 or int(coord[2]) < 1 or int(coord[0]) > 9 or int(coord[2]) >= 9:
-        print("Vos nombre est trop petit, ou trop grand. \nRéessayer avec des valeurs comprises entre 1 et 8")
         return 0
     if coord[0].isdigit() == False or coord[2].isdigit() == False:
         print("Vous avez rentrer un caractere qui n'est pas un nombre.")
         return 0
     x = int(coord[0])
     y = int(coord[2])
+    if x < 1 or y < 1 or x > 9 or y >= 9:
+        print("Vos nombre est trop petit, ou trop grand. \nRéessayer avec des valeurs comprises entre 1 et 8")
+        return 0
+
     if is_already_done(arr_p, x, y) == 1:
         print("Deja choisit. voir le plateau :\n")
         print_arr2D(arr_p)
@@ -48,9 +57,11 @@ def get_user_coord(arr_p):
     return coord
 
 
-def get_bot_coord():
+def get_bot_coord(arr_p):
     coord = [random.randint(1, 8), random.randint(1, 8)]
-    while (check_user_coord(arr_p, coord) == 0):
+    x = int(coord[0])
+    y = int(coord[1])
+    while (is_already_done(arr_p, x, y) == 1):
         print("Hmmm... Laisse moi réfléchir...")
         coord = [random.randint(1, 8), random.randint(1, 8)]
     return coord
@@ -99,9 +110,9 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     print_arr2D(arr_p)
 
     #Tour du BOT
-    print("\n Au tour de l'ordinateur....")
+    print("\nAu tour de l'ordinateur....")
     time.sleep(1)
-    b_coord = get_bot_coord()
+    b_coord = get_bot_coord(arr_p)
     b_x = int(b_coord[0])
     b_y = int(b_coord[1])
     print("L'ordinateur a choisit: ", b_x, b_y)
@@ -116,4 +127,4 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     time.sleep(1)
     print_arr2D(arr_p)
 
-    print("\n#############Fin du tour#############\nLes scores sont :\nJoueur:", score_j, "\nBot:", score_b, "\n#####################################")
+    print("\n\033[38;5;23m#############Fin du tour#############\nLes scores sont :\033[0m\n\033[38;5;22mJoueur:\033[0m", "\033[38;5;28m", score_j,"\033[0m", "\n\033[38;5;52mBot:\033[0m", "\033[38;5;88m", score_b,"\033[0m", "\n\033[38;5;23m#####################################\033[0m")
