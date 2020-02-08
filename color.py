@@ -13,7 +13,7 @@ for i in range(0, 16):
     print (u"\u001b[0m")
 '''
 
-print("\033[38;5;38 TEXT  \033[0m")
+print("\033[38;5;38m TEXT  \033[0m")
 
 
 def print_arr2D(arr):

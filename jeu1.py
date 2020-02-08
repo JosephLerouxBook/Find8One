@@ -24,27 +24,26 @@ def print_arr2D(arr):
             else:
                 print("\033[38;5;243m" + car + "\033[0m", end=' ')
         print("\r")
-        #print(*line)
 
 
 def check_user_coord(arr_p, coord):
     if coord == "" or coord == " ":
-        print("Vous n'avez rien rentrez. ")
+        print("\033[38;5;166mVous n'avez rien rentrez.\033[0m")
         return 0
     if len(coord) <= 2 or len(coord) > 3:
-        print("Ce n'est pas le bon format.\nRessayez avec ce format : 1;1.")
+        print("\033[38;5;166mCe n'est pas le bon format.\nRessayez avec ce format : 1;1.\033[0m")
         return 0
     if coord[0].isdigit() == False or coord[2].isdigit() == False:
-        print("Vous avez rentrer un caractere qui n'est pas un nombre.")
+        print("\033[38;5;166mVous avez rentrer un caractere qui n'est pas un nombre.\033[0m")
         return 0
     x = int(coord[0])
     y = int(coord[2])
     if x < 1 or y < 1 or x > 9 or y >= 9:
-        print("Vos nombre est trop petit, ou trop grand. \nRéessayer avec des valeurs comprises entre 1 et 8")
+        print("\033[38;5;166mVos nombre est trop petit, ou trop grand. \nRéessayer avec des valeurs comprises entre 1 et 8\033[0m")
         return 0
 
     if is_already_done(arr_p, x, y) == 1:
-        print("Deja choisit. voir le plateau :\n")
+        print("\033[38;5;166mDeja choisit. voir le plateau :\n\033[0m")
         print_arr2D(arr_p)
         return 0
     return 1
@@ -53,7 +52,7 @@ def check_user_coord(arr_p, coord):
 def get_user_coord(arr_p):
     coord = input("Rentrez vos coordonnées de type \"x;x\" où x est un chiffre allant de 1 à 8\n")
     while (check_user_coord(arr_p, coord) == 0):
-        coord = input("Réessayer\n")
+        coord = input("\033[38;5;166mRéessayer\033[0m\n")
     return coord
 
 
@@ -101,11 +100,11 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     print("Vous avez choisit: ", p_x, p_y)
     if arr[p_y - 1][p_x - 1] == 1:
         arr_p[p_y - 1][p_x - 1] = 1
-        print("yay")
+        print("Bien joué !")
         score_j += 1
     else:
         arr_p[p_y - 1][p_x - 1] = 0
-        print("Presque")
+        print("Dommage, Presque!")
     time.sleep(1)
     print_arr2D(arr_p)
 
@@ -119,12 +118,17 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     time.sleep(1)
     if arr[b_y-1][b_x-1] == 1:
         arr_p[b_y-1][b_x-1] = 1
-        print("bot:Yay")
+        print("Bot: \'Yay\'")
         score_b +=1
     else:
         arr_p[b_y-1][b_x-1] = 0
-        print("bot:presque")
+        print("Bot:\'Presque!\'")
     time.sleep(1)
     print_arr2D(arr_p)
 
     print("\n\033[38;5;23m#############Fin du tour#############\nLes scores sont :\033[0m\n\033[38;5;22mJoueur:\033[0m", "\033[38;5;28m", score_j,"\033[0m", "\n\033[38;5;52mBot:\033[0m", "\033[38;5;88m", score_b,"\033[0m", "\n\033[38;5;23m#####################################\033[0m")
+
+if (score_j > score_b):
+    print("\n\033[38;5;52mDommage ! Une prochaine fois peu etre !\033[0m")
+else:
+    print("\n\033[38;5;160mB\033[38;5;89mi\033[38;5;17m\033[38;5;26me\033[38;5;70mn \033[38;5;154mj\033[38;5;214mo\033[38;5;160mu\033[38;5;89mé\033[0m ! \033[38;5;34mChampion !")
