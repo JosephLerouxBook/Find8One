@@ -16,7 +16,7 @@ def print_arr2D(arr):
         for car in line:
             if (car == 0):
                 print("\033[38;5;239m" + str(car) + "\033[0m", end=' ')
-            elif (car == 1 ):
+            elif (car == 1):
                 print("\033[38;5;41m" + str(car) + "\033[0m", end=' ')
             else:
                 print("\033[38;5;243m" + car + "\033[0m", end=' ')
@@ -53,11 +53,14 @@ def get_user_coord(arr_p):
     return coord
 
 
-def get_bot_coord(arr_p):
-    coord = [random.randint(1, 8), random.randint(1, 8)]
-    x = int(coord[0])
-    y = int(coord[1])
-    while (is_already_done(arr_p, x, y) == 1):
-        print("Hmmm... Laisse moi réfléchir...")
-        coord = [random.randint(1, 8), random.randint(1, 8)]
+def get_bot_coord(notdoneliste):
+    ind = random.randint(0, len(notdoneliste))
+    coord = notdoneliste[ind]
+    notdoneliste.remove(coord)
     return coord
+
+
+def delete_player_cord_from_not_done(notdoneliste, p_coordX, p_coordY):
+    coord = str(p_coordY-1) + str(p_coordY-1)
+    notdoneliste.remove(coord)
+    return notdoneliste

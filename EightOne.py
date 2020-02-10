@@ -6,6 +6,7 @@ from importa import *
 #
 arr = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
 arr_p = [['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'], ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']]
+not_done = ['00', '10', '20', '30', '40', '50', '60', '70', '01', '11', '21', '31', '41', '51', '61', '71', '02', '12', '22', '32', '42', '52', '62', '72', '03', '13', '23', '33', '43', '53', '63', '73', '04', '14', '24', '34', '44', '54', '64', '74', '05', '15', '25', '35', '45', '55', '65', '75', '06', '16', '26', '36', '46', '56', '66', '76', '07', '17', '27', '37', '47', '57', '67', '77']
 score_j = 0
 score_b = 0
 p_coord = 0
@@ -42,23 +43,26 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     else:
         arr_p[p_y - 1][p_x - 1] = 0
         print("Dommage, Presque!")
+    not_done = delete_player_cord_from_not_done(not_done, p_x, p_y)
     time.sleep(1)
     print_arr2D(arr_p)
 
     #Tour du BOT
     print("\nAu tour de l'ordinateur....")
     time.sleep(1)
-    b_coord = get_bot_coord(arr_p)
+    b_coord = get_bot_coord(not_done)
     b_x = int(b_coord[0])
     b_y = int(b_coord[1])
-    print("L'ordinateur a choisit: ", b_x, b_y)
+    print("L'ordinateur a choisit: ", b_x+1, b_y+1)
     time.sleep(1)
-    if arr[b_y-1][b_x-1] == 1:
-        arr_p[b_y-1][b_x-1] = 1
+    print("b_x : ",b_x)
+    print("b_y : ", b_y)
+    if arr[b_y][b_x] == 1:
+        arr_p[b_y][b_x] = 1
         print("Bot: \'Yay\'")
         score_b +=1
     else:
-        arr_p[b_y-1][b_x-1] = 0
+        arr_p[b_y][b_x] = 0
         print("Bot:\'Presque!\'")
     time.sleep(1)
     print_arr2D(arr_p)
