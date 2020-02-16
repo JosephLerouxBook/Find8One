@@ -28,7 +28,7 @@ for i in range(0, 8):
 #Intro
 print("\033[38;5;38mBienvenue !\nLes regles sont simples : Un tableau de 8x8 cache des 1 et des 0. Il n'y as qu'un 1 par ligne.\nVotre but? Trouvez tout les 1 avant votre adversaire.\nBonne chance\033[0m")
 
-while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
+while(score_b != 5 and score_j != 5):
     #Tour du joueur
     print("\nvotre tour...")
     #print("\033[38;5;240m     #That is, \033[38;5;<FG COLOR>m")
@@ -55,8 +55,8 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
     b_y = int(b_coord[1])
     print("L'ordinateur a choisit: ", b_x+1, b_y+1)
     time.sleep(1)
-    print("b_x : ",b_x)
-    print("b_y : ", b_y)
+    #print("b_x : ",b_x)
+    #print("b_y : ", b_y)
     if arr[b_y][b_x] == 1:
         arr_p[b_y][b_x] = 1
         print("Bot: \'Yay\'")
@@ -69,7 +69,7 @@ while(score_b + score_j != 8 or score_b > 5 or score_j > 5):
 
     print("\n\033[38;5;23m#############Fin du tour#############\nLes scores sont :\033[0m\n\033[38;5;22mJoueur:\033[0m", "\033[38;5;28m", score_j,"\033[0m", "\n\033[38;5;52mBot:\033[0m", "\033[38;5;88m", score_b,"\033[0m", "\n\033[38;5;23m#####################################\033[0m")
 
-if (score_j > score_b):
+if (score_j < score_b):
     print("\n\033[38;5;52mDommage ! Une prochaine fois peu etre !\033[0m")
 else:
     print("\n\033[38;5;160mB\033[38;5;89mi\033[38;5;17m\033[38;5;26me\033[38;5;70mn \033[38;5;154mj\033[38;5;214mo\033[38;5;160mu\033[38;5;89mé\033[0m ! \033[38;5;34mChampion !")
